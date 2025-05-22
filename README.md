@@ -7,9 +7,9 @@ This example demonstrates a .NET 8 Hello World application containerized with:
 
 ---
 
-## 📂 Git-Based OpenShift Deployment
+## Git-Based OpenShift Deployment
 
-### 🧱 Step 1: Push to Git
+### Step 1: Push to Git
 
 Ensure your repository includes:
 - Dockerfile
@@ -18,7 +18,7 @@ Ensure your repository includes:
 
 Push it to GitHub, GitLab, or a private Git service.
 
-### 🚀 Step 2: Deploy from Git in OpenShift
+### Step 2: Deploy from Git in OpenShift
 
 Via Web Console:
 1. Go to **Developer → +Add → From Git**
@@ -36,7 +36,7 @@ oc expose svc/jdt-analyzer-net8
 
 ---
 
-## 🌐 Access and Upload Test
+## Access and Upload Test
 
 ```bash
 curl -F "file=@token.jwt" http://<your-route>/upload
@@ -44,7 +44,7 @@ curl -F "file=@token.jwt" http://<your-route>/upload
 
 ---
 
-## 🔍 Verify Java & Bash Inside the Pod
+## Verify Java & Bash Inside the Pod
 
 ```bash
 oc get pods
@@ -56,7 +56,7 @@ ls /app/analyzed-jdts
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 jdt-analyzer-net8-openjdk22/
@@ -72,7 +72,7 @@ jdt-analyzer-net8-openjdk22/
 
 ---
 
-## ✅ Notes
+## Notes
 
 - Java OpenJDK 22 is installed from Adoptium (Eclipse Temurin)
 - Bash is available for scripting and inspection
