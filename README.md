@@ -7,51 +7,44 @@ This example demonstrates a .NET 8 Hello World application containerized with:
 
 ---
 
-## Build (Local)
+## 📂 Git-Based OpenShift Deployment
+
+### 🧱 Step 1: Push to Git
+
+Ensure your repository includes:
+- Dockerfile
+- run.sh
+- HelloWorldApp/ source directory
+
+Push it to GitHub, GitLab, or a private Git service.
+
+### 🚀 Step 2: Deploy from Git in OpenShift
+
+Via Web Console:
+1. Go to **Developer → +Add → From Git**
+2. Enter Git repo URL (e.g., https://github.com/your-org/jdt-analyzer-poc)
+3. Select build strategy: **Dockerfile**
+4. Configure name, port (8080), and route exposure
+5. Click **Create**
+
+Or via CLI:
 
 ```bash
-docker build -t jdt-analyzer-net8 .
-```
-
-## Run Locally
-
-```bash
-docker run -p 8080:8080 jdt-analyzer-net8
-```
-
-## Upload Test (Local)
-
-```bash
-curl -F "file=@sample.jdk" http://localhost:8080/upload
+oc new-app --name=jdt-analyzer-net8 --strategy=docker --context-dir=src/HelloWorldApp https://github.com/your-org/jdt-analyzer-poc.git
+oc expose svc/jdt-analyzer-net8
 ```
 
 ---
 
-## OpenShift Deployment
-
-### Start Build with Source Directory
+## 🌐 Access and Upload Test
 
 ```bash
-oc new-build --name=jdt-analyzer-net8 --binary --strategy=docker
-oc start-build jdt-analyzer-net8 --from-dir=. --follow
+curl -F "file=@token.jwt" http://<your-route>/upload
 ```
 
-### Deploy the Application
+---
 
-```bash
-oc new-app jdt-analyzer-net8
-oc expose svc/jdt-analyzer-net8
-```
-
-### Access and Test Routes
-
-```bash
-ROUTE=$(oc get route jdt-analyzer-net8 -o jsonpath="http://{.spec.host}")
-curl $ROUTE/
-curl -F "file=@sample.jdk" $ROUTE/upload
-```
-
-### Verify Java & Bash Inside the Pod
+## 🔍 Verify Java & Bash Inside the Pod
 
 ```bash
 oc get pods
@@ -63,7 +56,7 @@ ls /app/analyzed-jdts
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 jdt-analyzer-net8-openjdk22/
@@ -79,8 +72,8 @@ jdt-analyzer-net8-openjdk22/
 
 ---
 
-## Notes
+## ✅ Notes
 
-- Java OpenJDK 22 is installed from Adoptium (Eclipse Temurin).
-- Bash script verifies environment and lists uploaded JDT files.
-- /upload route accepts and saves JDK-related files inside `/app/analyzed-jdts`.
+- Java OpenJDK 22 is installed from Adoptium (Eclipse Temurin)
+- Bash is available for scripting and inspection
+- /upload route handles and persists JDK uploads inside the container
