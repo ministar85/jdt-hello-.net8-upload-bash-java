@@ -39,7 +39,7 @@ oc expose svc/jdt-analyzer-net8
 ## Access and Upload Test
 
 ```bash
-curl -F "file=@token.jwt" http://<your-route>/upload
+curl -F "file=@sample.jdk" http://<your-route>/upload
 ```
 
 ---
