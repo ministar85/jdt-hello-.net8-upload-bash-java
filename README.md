@@ -7,19 +7,19 @@ This example demonstrates a .NET 8 Hello World application containerized with:
 
 ---
 
-## 🛠️ Build (Local)
+## Build (Local)
 
 ```bash
 docker build -t jdt-analyzer-net8 .
 ```
 
-## 🚀 Run Locally
+## Run Locally
 
 ```bash
 docker run -p 8080:8080 jdt-analyzer-net8
 ```
 
-## 📤 Upload Test (Local)
+## Upload Test (Local)
 
 ```bash
 curl -F "file=@sample.jdk" http://localhost:8080/upload
@@ -27,23 +27,23 @@ curl -F "file=@sample.jdk" http://localhost:8080/upload
 
 ---
 
-## ☁️ OpenShift Deployment
+## ☁OpenShift Deployment
 
-### 🧱 Start Build with Source Directory
+### Start Build with Source Directory
 
 ```bash
 oc new-build --name=jdt-analyzer-net8 --binary --strategy=docker
 oc start-build jdt-analyzer-net8 --from-dir=. --follow
 ```
 
-### 🚢 Deploy the Application
+### Deploy the Application
 
 ```bash
 oc new-app jdt-analyzer-net8
 oc expose svc/jdt-analyzer-net8
 ```
 
-### 🌐 Access and Test Routes
+### Access and Test Routes
 
 ```bash
 ROUTE=$(oc get route jdt-analyzer-net8 -o jsonpath="http://{.spec.host}")
@@ -51,7 +51,7 @@ curl $ROUTE/
 curl -F "file=@sample.jdk" $ROUTE/upload
 ```
 
-### 🔍 Verify Java & Bash Inside the Pod
+### Verify Java & Bash Inside the Pod
 
 ```bash
 oc get pods
@@ -63,7 +63,7 @@ ls /app/analyzed-jdts
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 jdt-analyzer-net8-openjdk22/
@@ -79,7 +79,7 @@ jdt-analyzer-net8-openjdk22/
 
 ---
 
-## ✅ Notes
+## Notes
 
 - Java OpenJDK 22 is installed from Adoptium (Eclipse Temurin).
 - Bash script verifies environment and lists uploaded JDT files.
