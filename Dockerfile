@@ -6,9 +6,13 @@ RUN dotnet publish HelloWorldApp/HelloWorldApp.csproj -c Release -o /app
 
 # Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-RUN apt-get update && apt-get install -y bash wget &&     wget https://download.oracle.com/java/22/latest/jdk-22_linux-x64_bin.tar.gz &&     mkdir -p /usr/java &&     tar -xzf jdk-22_linux-x64_bin.tar.gz -C /usr/java &&     rm jdk-22_linux-x64_bin.tar.gz
+RUN apt-get update && apt-get install -y bash wget tar && \
+    wget https://github.com/adoptium/temurin22-binaries/releases/download/jdk-22%2B36/OpenJDK22U-jdk_x64_linux_hotspot_22_36.tar.gz && \
+    mkdir -p /usr/java && \
+    tar -xzf OpenJDK22U-jdk_x64_linux_hotspot_22_36.tar.gz -C /usr/java && \
+    rm OpenJDK22U-jdk_x64_linux_hotspot_22_36.tar.gz
 
-ENV JAVA_HOME=/usr/java/jdk-22
+ENV JAVA_HOME=/usr/java/jdk-22+36
 ENV PATH="$JAVA_HOME/bin:$PATH"
 
 WORKDIR /app
