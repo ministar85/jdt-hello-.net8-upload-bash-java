@@ -27,7 +27,7 @@ curl -F "file=@sample.jdk" http://localhost:8080/upload
 
 ---
 
-## ☁OpenShift Deployment
+## OpenShift Deployment
 
 ### Start Build with Source Directory
 
