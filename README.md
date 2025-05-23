@@ -16,7 +16,7 @@ Ensure your repository includes:
 - run.sh
 - HelloWorldApp/ source directory
 
-Push it to GitHub, GitLab, or a private Git service.
+Push it to GitHub, GitLab or a private Git service.
 
 ### Step 2: Deploy from Git in OpenShift
 
@@ -24,7 +24,7 @@ Via Web Console:
 1. Go to **Developer → +Add → From Git**
 2. Enter Git repo URL (e.g., https://github.com/your-org/jdt-analyzer-poc)
 3. Select build strategy: **Dockerfile**
-4. Configure name, port (8080), and route exposure
+4. Configure name, port (8080) and route exposure
 5. Click **Create**
 
 Or via CLI:
